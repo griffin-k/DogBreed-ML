@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/cgreen"
+    tools:context=".gemini_vision">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        app:cardCornerRadius="20dp"
+        android:backgroundTint="@color/white"
+        android:layout_marginTop="-20dp"
+        app:cardElevation="4dp"
+        tools:ignore="MissingConstraints" >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/image_view"
+            android:layout_width="340dp"
+            android:layout_height="380dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            app:riv_corner_radius="20dp"
+            android:background="@drawable/border" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:text="Predicted Results"
+            android:background="@color/white"
+            android:padding="16dp"
+            android:gravity="center"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/linearlayoutButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <Button
+            android:id="@+id/load_image_button"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/white"
+            android:text="Open Gallery"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/capture_image_button"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/white"
+            android:text="open Camera"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/record_video_button"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/white"
+            android:text="Live Feed"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnPredict"
+            android:layout_gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:minHeight="48dp"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="Predict"
+            />
+
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnRequest"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:text="Allow Camera Permission"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+
+
+
+
+
+
+
+
+</LinearLayout>
