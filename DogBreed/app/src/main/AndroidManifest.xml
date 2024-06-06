@@ -31,9 +31,7 @@
         <activity
             android:name=".SelectModel"
             android:exported="false" />
-        <activity
-            android:name=".test"
-            android:exported="false" />
+
         <activity
             android:name=".signup"
             android:exported="true" />

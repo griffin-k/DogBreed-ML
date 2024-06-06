@@ -9,14 +9,33 @@
     android:gravity="center"
     tools:context=".tensor_flow">
 
+<!--    <com.airbnb.lottie.LottieAnimationView-->
+<!--        android:id="@+id/animation_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="150dp"-->
+<!--        app:lottie_autoPlay="true"-->
+<!--        android:gravity="center"-->
+<!--        app:lottie_loop="true"-->
+<!--        app:lottie_rawRes="@raw/foots" />-->
+
+    <ImageView
+        android:layout_width="353dp"
+        android:layout_height="230dp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        android:src="@drawable/dogs">
+
+    </ImageView>
+
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
         android:layout_height="350dp"
         android:foregroundGravity="center"
         android:backgroundTint="@color/white"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="0dp"
         android:layout_gravity="center"
         app:cardCornerRadius="20dp"
+        android:layout_marginBottom="150dp"
         app:cardElevation="4dp"
         tools:ignore="MissingConstraints">
 
