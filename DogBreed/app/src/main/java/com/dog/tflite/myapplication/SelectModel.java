@@ -51,7 +51,7 @@ public class SelectModel extends AppCompatActivity {
 
     private void handleGeminiVisionClick() {
 
-        Intent intent = new Intent(SelectModel.this, gemini_vision.class);
+        Intent intent = new Intent(SelectModel.this, visionapi.class);
         startActivity(intent);
     }
 

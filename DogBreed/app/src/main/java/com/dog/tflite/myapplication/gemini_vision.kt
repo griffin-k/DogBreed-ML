@@ -1,7 +1,4 @@
 package com.dog.tflite.myapplication
-
-
-
 import android.Manifest.permission.CAMERA
 import android.Manifest.permission.RECORD_AUDIO
 import android.content.Context

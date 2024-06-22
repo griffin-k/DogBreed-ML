@@ -23,6 +23,9 @@
         android:theme="@style/Theme.DogBreed"
         tools:targetApi="31">
         <activity
+            android:name=".visionapi"
+            android:exported="false" />
+        <activity
             android:name=".custom_model"
             android:exported="false" />
         <activity
@@ -31,7 +34,6 @@
         <activity
             android:name=".SelectModel"
             android:exported="false" />
-
         <activity
             android:name=".signup"
             android:exported="true" />

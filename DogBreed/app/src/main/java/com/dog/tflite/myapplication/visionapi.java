@@ -5,14 +5,10 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import com.google.ai.client.generativeai.GenerativeModel;
 import com.google.ai.client.generativeai.java.GenerativeModelFutures;
@@ -26,13 +22,9 @@ import java.io.IOException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class custom_model extends AppCompatActivity {
-
-    private ImageView imageView;
-    private CardView resultCardView;
+public class visionapi extends AppCompatActivity {
     private TextView textView;
-    private EditText editTextInput;
-    private Button buttonImageRecognition;
+    private ImageView imageView;
     private Bitmap selectedImageBitmap;
 
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -41,24 +33,13 @@ public class custom_model extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_custom_model);
+        setContentView(R.layout.activity_vision);
 
-        // Initialize views
-        imageView = findViewById(R.id.imageView);
-        resultCardView = findViewById(R.id.resultCardView);
         textView = findViewById(R.id.textView);
-        editTextInput = findViewById(R.id.editTextInput);
-        buttonImageRecognition = findViewById(R.id.buttonImageRecognition);
+        imageView = findViewById(R.id.imageView);
 
         mainExecutor = Executors.newSingleThreadExecutor();
 
-        // Example: Set an image (you would typically load from gallery or camera)
-        imageView.setOnClickListener(v -> openGallery());
-
-        // Set the button initially disabled
-        buttonImageRecognition.setEnabled(false);
-
-        // Enable the button once an image is selected
         imageView.setOnClickListener(v -> openGallery());
     }
 
@@ -77,9 +58,6 @@ public class custom_model extends AppCompatActivity {
                 // Set the bitmap to ImageView
                 imageView.setImageBitmap(bitmap);
                 selectedImageBitmap = bitmap;
-
-                // Enable the button once an image is selected
-                buttonImageRecognition.setEnabled(true);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -88,19 +66,14 @@ public class custom_model extends AppCompatActivity {
 
     public void buttonImageRecognitionGemini(View view) {
         if (selectedImageBitmap != null) {
-            // Disable the button while the request is being processed
-            buttonImageRecognition.setEnabled(false);
-
-            // Clear input field
-            editTextInput.setText("");
+            // Clear text view
+            textView.setText("");
 
             GenerativeModel generativeModel = new GenerativeModel("gemini-pro-vision", "AIzaSyAVremZ8j3CWnUxBwZ8jZQUpaY16EB68cY");
             GenerativeModelFutures model = GenerativeModelFutures.from(generativeModel);
 
-            String userInput = editTextInput.getText().toString().trim();
-
             Content content = new Content.Builder()
-                    .addText(userInput + "you act like a dog Breed classification model you only respond related to Dogs if any other question or image Ask to You  have to responde like Please ask my about Dog or Provide me the DOg image and your response must be Short and 2 to point maximum 2 to 3 lines ")
+                    .addText("Act as a Breed classifier of Only Dogs Your job is to classify the Breed of dog. You should not output anything other than the format mentioned below and if the image is not of the dog then return a short text to ask the user to upload the dog image again. You should not accept any other animal image other than the dog. Your Output should be in the format Mentioned Below\n Your Output:Breed Name: breed here \n Color: breed color here \n Confidence: How much sure you are in percentage like 90% or 60% etc.")
                     .addImage(selectedImageBitmap)
                     .build();
 
@@ -110,10 +83,10 @@ public class custom_model extends AppCompatActivity {
             // Delayed updates to textView
             mainExecutor.execute(() -> {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(2000);
                     runOnUiThread(() -> textView.setText("Model is predicting..."));
 
-                    Thread.sleep(1000);
+                    Thread.sleep(2000);
                     runOnUiThread(() -> textView.setText("Model is generating response..."));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -125,22 +98,16 @@ public class custom_model extends AppCompatActivity {
                 @Override
                 public void onSuccess(GenerateContentResponse result) {
                     String resultText = result.getText();
-                    runOnUiThread(() -> {
-                        textView.setText(resultText);
-                        buttonImageRecognition.setEnabled(true);
-                    });
+                    runOnUiThread(() -> textView.setText(resultText));
                 }
 
                 @Override
                 public void onFailure(Throwable t) {
-                    runOnUiThread(() -> {
-                        textView.setText(t.toString());
-                        buttonImageRecognition.setEnabled(true);
-                    });
+                    runOnUiThread(() -> textView.setText(t.toString()));
                 }
             }, mainExecutor);
         } else {
-            Toast.makeText(this, "Please select an image from the gallery first.", Toast.LENGTH_SHORT).show();
+            textView.setText("Please select an image from the gallery first.");
         }
     }
 }
